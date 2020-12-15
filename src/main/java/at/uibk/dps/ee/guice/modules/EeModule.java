@@ -137,23 +137,23 @@ public abstract class EeModule extends Opt4JModule {
 
 	@Override
 	public void addIndividualStateListener(Class<? extends IndividualStateListener> listener) {
-		throwOpt4JException();
+		throwExceptionWithOpt4JMessage();
 	}
 
 	@Override
 	public void addOptimizerIterationListener(Class<? extends OptimizerIterationListener> listener) {
-		throwOpt4JException();
+		throwExceptionWithOpt4JMessage();
 	}
 
 	@Override
 	public void addOptimizerStateListener(Class<? extends OptimizerStateListener> listener) {
-		throwOpt4JException();
+		throwExceptionWithOpt4JMessage();
 	}
 
 	/**
 	 * Throws the exception for the methods from within Opt4J.
 	 */
-	protected final void throwOpt4JException() {
+	protected final void throwExceptionWithOpt4JMessage() {
 		throw new IllegalStateException(Opt4JExceptionMessage);
 	}
 

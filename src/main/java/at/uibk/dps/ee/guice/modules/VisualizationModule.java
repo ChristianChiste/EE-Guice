@@ -44,8 +44,6 @@ public abstract class VisualizationModule extends EeModule {
 	@Override
 	protected void configure() {
 		super.configure();
-
 		multi(ToolBarService.class);
 	}
-	
 }
