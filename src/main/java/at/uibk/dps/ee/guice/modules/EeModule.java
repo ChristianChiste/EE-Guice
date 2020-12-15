@@ -48,9 +48,9 @@ public abstract class EeModule extends Opt4JModule {
 	 * @param binder                 the binder
 	 * @param enactableStateListener the enactable state listener
 	 */
-	public static void addEnactableStateListener(Binder binder,
+	public static void addEnactableStateListener(final Binder binder,
 			final Class<? extends EnactableStateListener> enactableStateListener) {
-		Multibinder<EnactableStateListener> multiBinder = Multibinder.newSetBinder(binder,
+		final Multibinder<EnactableStateListener> multiBinder = Multibinder.newSetBinder(binder,
 				EnactableStateListener.class);
 		multiBinder.addBinding().to(enactableStateListener);
 	}
@@ -72,9 +72,9 @@ public abstract class EeModule extends Opt4JModule {
 	 * @param binder        the binder
 	 * @param stateListener stateListener the state listener to add
 	 */
-	public static void addEnactmentStateListener(Binder binder,
+	public static void addEnactmentStateListener(final Binder binder,
 			final Class<? extends EnactmentStateListener> stateListener) {
-		Multibinder<EnactmentStateListener> multiBinder = Multibinder.newSetBinder(binder,
+		final Multibinder<EnactmentStateListener> multiBinder = Multibinder.newSetBinder(binder,
 				EnactmentStateListener.class);
 		multiBinder.addBinding().to(stateListener);
 	}
@@ -90,11 +90,11 @@ public abstract class EeModule extends Opt4JModule {
 		 * Configure injected constants.
 		 */
 		PropertyModule module = new PropertyModule(this);
-		for (Property property : module.getProperties()) {
-			for (Annotation annotation : property.getAnnotations()) {
+		for (final Property property : module.getProperties()) {
+			for (final Annotation annotation : property.getAnnotations()) {
 				if (annotation.annotationType().getAnnotation(BindingAnnotation.class) != null) {
 					Class<?> type = property.getType();
-					Object value = property.getValue();
+					final Object value = property.getValue();
 
 					ConstantBindingBuilder builder = bindConstant(annotation);
 					if (type.equals(Integer.TYPE)) {
@@ -136,17 +136,17 @@ public abstract class EeModule extends Opt4JModule {
 	}
 
 	@Override
-	public void addIndividualStateListener(Class<? extends IndividualStateListener> listener) {
+	public void addIndividualStateListener(final Class<? extends IndividualStateListener> listener) {
 		throwExceptionWithOpt4JMessage();
 	}
 
 	@Override
-	public void addOptimizerIterationListener(Class<? extends OptimizerIterationListener> listener) {
+	public void addOptimizerIterationListener(final Class<? extends OptimizerIterationListener> listener) {
 		throwExceptionWithOpt4JMessage();
 	}
 
 	@Override
-	public void addOptimizerStateListener(Class<? extends OptimizerStateListener> listener) {
+	public void addOptimizerStateListener(final Class<? extends OptimizerStateListener> listener) {
 		throwExceptionWithOpt4JMessage();
 	}
 

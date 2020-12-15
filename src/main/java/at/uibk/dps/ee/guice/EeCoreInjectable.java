@@ -20,8 +20,8 @@ import at.uibk.dps.ee.core.enactable.EnactmentStateListener;
 public class EeCoreInjectable extends EeCore {
 
 	@Inject
-	public EeCoreInjectable(InputDataProvider inputDataProvider, OutputDataHandler outputDataHandler,
-			EnactableProvider enactableProvider, Set<EnactmentStateListener> stateListeners) {
+	public EeCoreInjectable(final InputDataProvider inputDataProvider, final OutputDataHandler outputDataHandler,
+			final EnactableProvider enactableProvider, final Set<EnactmentStateListener> stateListeners) {
 		super(inputDataProvider, outputDataHandler, enactableProvider, stateListeners);
 	}
 }
