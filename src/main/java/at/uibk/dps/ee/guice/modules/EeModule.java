@@ -79,7 +79,6 @@ public abstract class EeModule extends Opt4JModule {
 		multiBinder.addBinding().to(stateListener);
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	@Override
 	protected void configure() {
 		// this partial copying from Opt4JModule is quite ugly,
@@ -93,37 +92,7 @@ public abstract class EeModule extends Opt4JModule {
 		for (final Property property : module.getProperties()) {
 			for (final Annotation annotation : property.getAnnotations()) {
 				if (annotation.annotationType().getAnnotation(BindingAnnotation.class) != null) {
-					Class<?> type = property.getType();
-					final Object value = property.getValue();
-
-					ConstantBindingBuilder builder = bindConstant(annotation);
-					if (type.equals(Integer.TYPE)) {
-						builder.to((Integer) value);
-					} else if (type.equals(Long.TYPE)) {
-						builder.to((Long) value);
-					} else if (type.equals(Double.TYPE)) {
-						builder.to((Double) value);
-					} else if (type.equals(Float.TYPE)) {
-						builder.to((Float) value);
-					} else if (type.equals(Byte.TYPE)) {
-						builder.to((Byte) value);
-					} else if (type.equals(Short.TYPE)) {
-						builder.to((Short) value);
-					} else if (type.equals(Boolean.TYPE)) {
-						builder.to((Boolean) value);
-					} else if (type.equals(Character.TYPE)) {
-						builder.to((Character) value);
-					} else if (type.equals(String.class)) {
-						builder.to((String) value);
-					} else if (type.equals(Class.class)) {
-						builder.to((Class<?>) value);
-					} else if (value instanceof Enum<?>) {
-						builder.to((Enum) value);
-					} else {
-						String message = "Constant type not bindable: " + type + " of field " + property.getName()
-								+ " in module " + this.getClass().getName();
-						throw new ConfigurationException(Arrays.asList(new Message(message)));
-					}
+					bindAnnotatedConstant(property, annotation);
 				}
 			}
 		}
@@ -133,6 +102,47 @@ public abstract class EeModule extends Opt4JModule {
 		multi(ControlStateListener.class);
 		
 		config();
+	}
+	
+	/**
+	 * Follows the given annotation to bind a constant describing the provided module property. 
+	 * 
+	 * @param property the module property
+	 * @param annotation the annotation describing the constant to bind
+	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	protected void bindAnnotatedConstant(Property property, Annotation annotation) {
+		final Class<?> type = property.getType();
+		final Object value = property.getValue();
+
+		final ConstantBindingBuilder builder = bindConstant(annotation);
+		if (type.equals(Integer.TYPE)) {
+			builder.to((Integer) value);
+		} else if (type.equals(Long.TYPE)) {
+			builder.to((Long) value);
+		} else if (type.equals(Double.TYPE)) {
+			builder.to((Double) value);
+		} else if (type.equals(Float.TYPE)) {
+			builder.to((Float) value);
+		} else if (type.equals(Byte.TYPE)) {
+			builder.to((Byte) value);
+		} else if (type.equals(Short.TYPE)) {
+			builder.to((Short) value);
+		} else if (type.equals(Boolean.TYPE)) {
+			builder.to((Boolean) value);
+		} else if (type.equals(Character.TYPE)) {
+			builder.to((Character) value);
+		} else if (type.equals(String.class)) {
+			builder.to((String) value);
+		} else if (type.equals(Class.class)) {
+			builder.to((Class<?>) value);
+		} else if (value instanceof Enum<?>) {
+			builder.to((Enum) value);
+		} else {
+			String message = "Constant type not bindable: " + type + " of field " + property.getName()
+					+ " in module " + this.getClass().getName();
+			throw new ConfigurationException(Arrays.asList(new Message(message)));
+		}
 	}
 
 	@Override

@@ -19,6 +19,18 @@ import at.uibk.dps.ee.core.enactable.EnactmentStateListener;
  */
 public class EeCoreInjectable extends EeCore {
 
+	/**
+	 * This is the constructor which will be used during the dynamic dependency
+	 * injection.
+	 * 
+	 * @param inputDataProvider the component providing the input processing data
+	 * @param outputDataHandler the component handling the data produced when
+	 *                          running the workflow
+	 * @param enactableProvider the component providing the root enactable which is
+	 *                          used to run the enactment
+	 * @param stateListeners    the listeners which react to transitions between
+	 *                          different states of the enactment
+	 */
 	@Inject
 	public EeCoreInjectable(final InputDataProvider inputDataProvider, final OutputDataHandler outputDataHandler,
 			final EnactableProvider enactableProvider, final Set<EnactmentStateListener> stateListeners) {
