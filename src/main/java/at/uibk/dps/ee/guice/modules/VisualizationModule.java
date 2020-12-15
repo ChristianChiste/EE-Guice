@@ -23,8 +23,8 @@ public abstract class VisualizationModule extends EeModule {
 	 * @param toolBarService
 	 *            the tool bar service to be added
 	 */
-	public void addToolBarService(Class<? extends ToolBarService> toolBarService) {
-		Multibinder<ToolBarService> multibinder = Multibinder.newSetBinder(binder(), ToolBarService.class);
+	public void addToolBarService(final Class<? extends ToolBarService> toolBarService) {
+		final Multibinder<ToolBarService> multibinder = Multibinder.newSetBinder(binder(), ToolBarService.class);
 		multibinder.addBinding().to(toolBarService);
 	}
 
@@ -36,8 +36,8 @@ public abstract class VisualizationModule extends EeModule {
 	 * @param toolBarService
 	 *            the tool bar service to be added
 	 */
-	public static void addToolBarService(Binder binder, Class<? extends ToolBarService> toolBarService) {
-		Multibinder<ToolBarService> multibinder = Multibinder.newSetBinder(binder, ToolBarService.class);
+	public static void addToolBarService(final Binder binder, final Class<? extends ToolBarService> toolBarService) {
+		final Multibinder<ToolBarService> multibinder = Multibinder.newSetBinder(binder, ToolBarService.class);
 		multibinder.addBinding().to(toolBarService);
 	}
 	

@@ -23,12 +23,15 @@
     <exclude-pattern>.*/net/sourceforge/pmd/lang/java/ast/jdkversiontests/java10/LocalVariableTypeInference_varAsEnumName.java</exclude-pattern>
     <exclude-pattern>.*/net/sourceforge/pmd/lang/java/ast/jdkversiontests/java10/LocalVariableTypeInference_varAsTypeIdentifier.java</exclude-pattern>
 
-    <rule ref="category/java/bestpractices.xml" />
+    <rule ref="category/java/bestpractices.xml">
+    	<exclude name="AbstractClassWithoutAbstractMethod"/>
+    </rule>
     <rule ref="category/java/codestyle.xml"> 
     	<exclude name="OnlyOneReturn"/>
     	<exclude name="ClassNamingConventions"/>
     	<exclude name="FieldNamingConventions"/>
     	<exclude name="AvoidProtectedMethodInFinalClassNotExtending"/>
+    	<exclude name="AtLeastOneConstructor"/>
     </rule>
     <rule ref="category/java/design.xml">
     	<exclude name="LawOfDemeter"/>
