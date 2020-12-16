@@ -168,5 +168,4 @@ public abstract class EeModule extends Opt4JModule {
 	protected final void throwExceptionWithOpt4JMessage() {
 		throw new IllegalStateException(Opt4JExceptionMessage);
 	}
-
 }
