@@ -22,13 +22,10 @@ public class EeStarter extends Starter {
 	public void execute(String[] args) throws FailureException {
 		try {
 			execute(EeTask.class, args);
+		} catch (FailureException failureExc) {
+			throw (FailureException) failureExc;
 		} catch (Exception exception) {
-			if (exception instanceof FailureException) {
-				throw (FailureException) exception;
-			} else {
-				exception.printStackTrace();
-				throw new IllegalStateException("Unexpected Exception when executing the EE task");
-			}
+			throw new RuntimeException(exception);
 		}
 	}
 }

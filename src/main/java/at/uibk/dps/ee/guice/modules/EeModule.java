@@ -21,7 +21,6 @@ import at.uibk.dps.ee.core.ControlStateListener;
 import at.uibk.dps.ee.core.enactable.EnactableStateListener;
 import at.uibk.dps.ee.core.enactable.EnactmentStateListener;
 
-
 /**
  * Parent class of all modules used for the configuration of the enactment
  * process.
@@ -88,7 +87,7 @@ public abstract class EeModule extends Opt4JModule {
 		/**
 		 * Configure injected constants.
 		 */
-		PropertyModule module = new PropertyModule(this);
+		final PropertyModule module = new PropertyModule(this);
 		for (final Property property : module.getProperties()) {
 			for (final Annotation annotation : property.getAnnotations()) {
 				if (annotation.annotationType().getAnnotation(BindingAnnotation.class) != null) {
@@ -100,49 +99,69 @@ public abstract class EeModule extends Opt4JModule {
 		multi(EnactmentStateListener.class);
 		multi(EnactableStateListener.class);
 		multi(ControlStateListener.class);
-		
+
 		config();
 	}
-	
+
 	/**
-	 * Follows the given annotation to bind a constant describing the provided module property. 
+	 * Follows the given annotation to bind a constant describing the provided
+	 * module property.
 	 * 
-	 * @param property the module property
+	 * @param property   the module property
 	 * @param annotation the annotation describing the constant to bind
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected void bindAnnotatedConstant(Property property, Annotation annotation) {
+	protected void bindAnnotatedConstant(final Property property, final Annotation annotation) {
 		final Class<?> type = property.getType();
 		final Object value = property.getValue();
-
 		final ConstantBindingBuilder builder = bindConstant(annotation);
 		if (type.equals(Integer.TYPE)) {
 			builder.to((Integer) value);
-		} else if (type.equals(Long.TYPE)) {
-			builder.to((Long) value);
-		} else if (type.equals(Double.TYPE)) {
-			builder.to((Double) value);
-		} else if (type.equals(Float.TYPE)) {
-			builder.to((Float) value);
-		} else if (type.equals(Byte.TYPE)) {
-			builder.to((Byte) value);
-		} else if (type.equals(Short.TYPE)) {
-			builder.to((Short) value);
-		} else if (type.equals(Boolean.TYPE)) {
-			builder.to((Boolean) value);
-		} else if (type.equals(Character.TYPE)) {
-			builder.to((Character) value);
-		} else if (type.equals(String.class)) {
-			builder.to((String) value);
-		} else if (type.equals(Class.class)) {
-			builder.to((Class<?>) value);
-		} else if (value instanceof Enum<?>) {
-			builder.to((Enum) value);
-		} else {
-			String message = "Constant type not bindable: " + type + " of field " + property.getName()
-					+ " in module " + this.getClass().getName();
-			throw new ConfigurationException(Arrays.asList(new Message(message)));
+			return;
 		}
+		if (type.equals(Long.TYPE)) {
+			builder.to((Long) value);
+			return;
+		}
+		if (type.equals(Double.TYPE)) {
+			builder.to((Double) value);
+			return;
+		}
+		if (type.equals(Float.TYPE)) {
+			builder.to((Float) value);
+			return;
+		}
+		if (type.equals(Byte.TYPE)) {
+			builder.to((Byte) value);
+			return;
+		}
+		if (type.equals(Short.TYPE)) {
+			builder.to((Short) value);
+			return;
+		}
+		if (type.equals(Boolean.TYPE)) {
+			builder.to((Boolean) value);
+			return;
+		}
+		if (type.equals(Character.TYPE)) {
+			builder.to((Character) value);
+			return;
+		}
+		if (type.equals(String.class)) {
+			builder.to((String) value);
+			return;
+		}
+		if (type.equals(Class.class)) {
+			builder.to((Class<?>) value);
+			return;
+		}
+		if (value instanceof Enum<?>) {
+			builder.to((Enum) value);
+			return;
+		}
+		final String message = "Constant type not bindable: " + type + " of field " + property.getName() + " in module "
+				+ this.getClass().getName();
+		throw new ConfigurationException(Arrays.asList(new Message(message)));
 	}
 
 	@Override

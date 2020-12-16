@@ -31,14 +31,14 @@ public class EeConfiguration extends Opt4J {
 	 * @param args
 	 * @throws Exception
 	 */
-	public static void main(String[] args) throws FailureException{
-		if (args.length > 0 && args[0].equalsIgnoreCase("-s")) {
-			String[] a = new String[args.length - 1];
-			System.arraycopy(args, 1, a, 0, a.length);
-			EeStarter.main(a);
+	public static void main(final String[] args) throws FailureException{
+		if (args.length > 0 && "-s".equalsIgnoreCase(args[0])) {
+			final String[] argumentArray = new String[args.length - 1];
+			System.arraycopy(args, 1, argumentArray, 0, argumentArray.length);
+			EeStarter.main(argumentArray);
 		} else {
 			searchModules();
-			EeConfiguration configurator = new EeConfiguration();
+			final EeConfiguration configurator = new EeConfiguration();
 			configurator.start(args);
 		}
 	}
@@ -48,8 +48,8 @@ public class EeConfiguration extends Opt4J {
 	 */
 	protected static void searchModules() {
 		// I may adjust this class to find only the classes relevant for scheduling
-		ModuleAutoFinder finder = new ModuleAutoFinder();
-		for (Class<? extends Module> module : finder.getModules()) {
+		final ModuleAutoFinder finder = new ModuleAutoFinder();
+		for (final Class<? extends Module> module : finder.getModules()) {
 			if (includeModuleClassInGui(module)) {
 				moduleList.add(module);
 			}
@@ -65,8 +65,8 @@ public class EeConfiguration extends Opt4J {
 	 *         (or actually has the same class) in the list of configurable module
 	 *         classes
 	 */
-	protected static boolean includeModuleClassInGui(Class<? extends Module> clazz) {
-		for (Class<? extends Module> configurableModule : CONFIGURABLE_MODULE_TYPES) {
+	protected static boolean includeModuleClassInGui(final Class<? extends Module> clazz) {
+		for (final Class<? extends Module> configurableModule : CONFIGURABLE_MODULE_TYPES) {
 			if (configurableModule.isAssignableFrom(clazz)) {
 				return true;
 			}
@@ -83,7 +83,7 @@ public class EeConfiguration extends Opt4J {
 	 *             file
 	 */
 	@Override
-	public void start(String[] args) {
+	public void start(final String[] args) {
 		String filename = null;
 		if (args.length > 0) {
 			filename = args[0];
@@ -96,11 +96,10 @@ public class EeConfiguration extends Opt4J {
 	 * on the module config.
 	 */
 	@Override
-	public Module getModule(Class<? extends Task> taskClass) {
+	public Module getModule(final Class<? extends Task> taskClass) {
 		return binder -> {
 			binder.bind(Task.class).to(taskClass);
 			binder.bind(ModuleList.class).toInstance(moduleList);
 		};
 	}
-
 }
