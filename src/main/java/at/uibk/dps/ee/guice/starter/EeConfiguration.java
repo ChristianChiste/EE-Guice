@@ -6,11 +6,11 @@ import java.util.List;
 import org.opt4j.core.config.ModuleAutoFinder;
 import org.opt4j.core.config.ModuleList;
 import org.opt4j.core.config.Task;
-import org.opt4j.core.config.visualization.Configurator;
 import org.opt4j.core.start.Opt4J;
 
 import com.google.inject.Module;
 
+import at.uibk.dps.ee.core.exception.FailureException;
 import at.uibk.dps.ee.guice.modules.EeModule;
 
 
@@ -31,14 +31,14 @@ public class EeConfiguration extends Opt4J {
 	 * @param args
 	 * @throws Exception
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) throws FailureException{
 		if (args.length > 0 && args[0].equalsIgnoreCase("-s")) {
 			String[] a = new String[args.length - 1];
 			System.arraycopy(args, 1, a, 0, a.length);
 			EeStarter.main(a);
 		} else {
 			searchModules();
-			Configurator configurator = new EeConfiguration();
+			EeConfiguration configurator = new EeConfiguration();
 			configurator.start(args);
 		}
 	}
