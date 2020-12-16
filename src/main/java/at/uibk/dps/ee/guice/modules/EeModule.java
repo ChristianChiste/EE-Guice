@@ -114,55 +114,38 @@ public abstract class EeModule extends Opt4JModule {
 	protected void bindAnnotatedConstant(final Property property, final Annotation annotation) {
 		final Class<?> type = property.getType();
 		final Object value = property.getValue();
+
 		final ConstantBindingBuilder builder = bindConstant(annotation);
+		
 		if (type.equals(Integer.TYPE)) {
 			builder.to((Integer) value);
-			return;
-		}
-		if (type.equals(Long.TYPE)) {
+		} else if (type.equals(Long.TYPE)) {
 			builder.to((Long) value);
-			return;
-		}
-		if (type.equals(Double.TYPE)) {
+		} else if (type.equals(Double.TYPE)) {
 			builder.to((Double) value);
-			return;
-		}
-		if (type.equals(Float.TYPE)) {
+		} else if (type.equals(Float.TYPE)) {
 			builder.to((Float) value);
-			return;
-		}
-		if (type.equals(Byte.TYPE)) {
+		} else if (type.equals(Byte.TYPE)) {
 			builder.to((Byte) value);
-			return;
-		}
-		if (type.equals(Short.TYPE)) {
+		} else if (type.equals(Short.TYPE)) {
 			builder.to((Short) value);
-			return;
-		}
-		if (type.equals(Boolean.TYPE)) {
+		} else if (type.equals(Boolean.TYPE)) {
 			builder.to((Boolean) value);
-			return;
-		}
-		if (type.equals(Character.TYPE)) {
+		} else if (type.equals(Character.TYPE)) {
 			builder.to((Character) value);
-			return;
-		}
-		if (type.equals(String.class)) {
+		} else if (type.equals(String.class)) {
 			builder.to((String) value);
-			return;
-		}
-		if (type.equals(Class.class)) {
+		} else if (type.equals(Class.class)) {
 			builder.to((Class<?>) value);
-			return;
-		}
-		if (value instanceof Enum<?>) {
+		} else if (value instanceof Enum<?>) {
 			builder.to((Enum) value);
-			return;
+		} else {
+			final String message = "Constant type not bindable: " + type + " of field " + property.getName() + " in module "
+					+ this.getClass().getName();
+			throw new ConfigurationException(Arrays.asList(new Message(message)));
 		}
-		final String message = "Constant type not bindable: " + type + " of field " + property.getName() + " in module "
-				+ this.getClass().getName();
-		throw new ConfigurationException(Arrays.asList(new Message(message)));
 	}
+	
 
 	@Override
 	public void addIndividualStateListener(final Class<? extends IndividualStateListener> listener) {

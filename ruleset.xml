@@ -25,7 +25,6 @@
 
     <rule ref="category/java/bestpractices.xml">
     	<exclude name="AbstractClassWithoutAbstractMethod"/>
-    	<exclude name="AbstractClassWithoutAnyMethod"/>
     </rule>
     <rule ref="category/java/codestyle.xml"> 
     	<exclude name="OnlyOneReturn"/>
@@ -54,6 +53,7 @@
     
     <rule ref="category/java/errorprone.xml">
     	<exclude name="BeanMembersShouldSerialize"/>
+    	<exclude name="AbstractClassWithoutAnyMethod"/>
     </rule>
     
     <!--  Things I have to add to the master rule set -->

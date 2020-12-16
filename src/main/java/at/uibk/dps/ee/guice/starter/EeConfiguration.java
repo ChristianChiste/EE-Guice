@@ -13,7 +13,6 @@ import com.google.inject.Module;
 import at.uibk.dps.ee.core.exception.FailureException;
 import at.uibk.dps.ee.guice.modules.EeModule;
 
-
 /**
  * The {@link EeConfiguration} is used to provide an interactive GUI for the
  * configuration of the enactment.
@@ -25,18 +24,22 @@ public class EeConfiguration extends Opt4J {
 
 	protected static final List<Class<? extends Module>> CONFIGURABLE_MODULE_TYPES = Arrays.asList(EeModule.class);
 
+	protected static final String COMMAND_ARGUMENT_START_NO_GUI = "-s";
+
 	/**
 	 * Main method opening up the gui
 	 * 
 	 * @param args
 	 * @throws Exception
 	 */
-	public static void main(final String[] args) throws FailureException{
-		if (args.length > 0 && "-s".equalsIgnoreCase(args[0])) {
+	public static void main(final String[] args) throws FailureException {
+		if (args.length > 0 && COMMAND_ARGUMENT_START_NO_GUI.equalsIgnoreCase(args[0])) {
+			// directly starts with the given config
 			final String[] argumentArray = new String[args.length - 1];
 			System.arraycopy(args, 1, argumentArray, 0, argumentArray.length);
 			EeStarter.main(argumentArray);
 		} else {
+			// open the configuration GUI
 			searchModules();
 			final EeConfiguration configurator = new EeConfiguration();
 			configurator.start(args);
