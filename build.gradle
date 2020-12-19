@@ -15,7 +15,7 @@ jacoco {
 	}
 // to use GitHub repositories as dependencies
 
-group 'APOLLO-EE-GUICE'
+group 'Apollo-Core-EE-Guice'
 version '1.0-SNAPSHOT'
 
 
@@ -28,8 +28,8 @@ repositories {
 
 dependencies {
 	
-	// dependencies to other parts of the APOLLO EE
-	implementation 'com.github.FedorSmirnov89:EE-Core:-SNAPSHOT'
+	// dependencies to other parts of the Apollo Core EE
+	implementation 'com.github.Apollo-Core:EE-Core:-SNAPSHOT'
 	
 	// as an example: dependency to Opt4J
 	implementation 'com.github.FedorSmirnov89:opt4j:-SNAPSHOT'
