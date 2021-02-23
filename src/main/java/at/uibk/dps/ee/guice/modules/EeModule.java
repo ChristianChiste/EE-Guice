@@ -128,6 +128,7 @@ public abstract class EeModule extends Opt4JModule {
     multi(EnactmentStateListener.class);
     multi(EnactableStateListener.class);
     multi(ControlStateListener.class);
+    multi(ModelModificationListener.class);
 
     config();
   }
