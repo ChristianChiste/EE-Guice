@@ -25,7 +25,7 @@ public class EeStarterRepeat extends Starter {
   public static void main(final String[] args) throws FailureException {
     final EeStarter starter = new EeStarter();
     final int executions = Integer.valueOf(args[0]);
-    final String workflowName = args[1].substring(0,17).split("-")[0];
+    final String workflowName = args[1].substring(17).split("-")[0];
     ExecutionData.workflowName = workflowName;
     for(int i = 0; i < executions; i++) {
       starter.execute(Arrays.copyOfRange(args, 1, args.length));
