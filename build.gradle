@@ -15,7 +15,7 @@ jacoco {
 	}
 // to use GitHub repositories as dependencies
 
-group 'ChristianChiste-EE-Guice'
+group 'Apollo-Core-EE-Guice'
 version '1.0-SNAPSHOT'
 
 
@@ -30,7 +30,6 @@ dependencies {
 	
 	// dependencies to other parts of the Apollo Core EE
 	implementation 'com.github.ChristianChiste:EE-Core:master-SNAPSHOT'
-  
 	
 	// as an example: dependency to Opt4J
 	implementation 'com.github.FedorSmirnov89:opt4j:-SNAPSHOT'
@@ -40,6 +39,7 @@ dependencies {
 	// test dependencies	
 	testCompile group: 'junit', 		name: 'junit', 					version: '4.+'
 	testCompile group: 'org.mockito',     name: 'mockito-core',     version: '3.4.4'
+
 }
 
 jacocoTestReport {

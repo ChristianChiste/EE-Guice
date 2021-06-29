@@ -28,6 +28,8 @@ public class ConfigCreator {
     for(int i = 5; i<args.length; i++) {
       failRates.add(args[i]);
     }
+    
+    String parForColl = filePathAfCl.contains("parFor") ? inputData.substring(12,inputData.length()-5).split("-")[1] : "";
 
     for(String failRate:failRates) {
 
@@ -75,7 +77,7 @@ public class ConfigCreator {
         DOMSource source = new DOMSource(doc);
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "2");
-        StreamResult result = new StreamResult(new File("generatedConfigs/" + filePathAfCl.substring(10,filePathAfCl.length()-5) 
+        StreamResult result = new StreamResult(new File("generatedConfigs/" + filePathAfCl.substring(10,filePathAfCl.length()-5) + parForColl 
         + "-" + schedulingType + "-" + failRate));
         transformer.transform(source, result);
 
